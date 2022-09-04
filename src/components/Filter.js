@@ -41,6 +41,9 @@ export default function Filter() {
     .then(data=>{setLocation(data.data)})
 },[])
 
+   const fetchRestaurants = (event) => {
+    setFilter({...filter, city_id:event.target.value})
+   };
     
    const handleCuisineChange=(event)=>{
     if(event.target.checked)
@@ -88,7 +91,7 @@ export default function Filter() {
                                 <div id="demo" className="collapse show">
                                     <div className="filter-heading">Filters</div>
                                      <div className="Select-Location">Select Location</div>
-                                    <select className="Rectangle-2236" >
+                                    <select className="Rectangle-2236" onChange={fetchRestaurants} >
                                     <option onClick={()=>{setLocation()}}>Select</option>
                                         {location.map(obj=>{
                                             return (
