@@ -9,7 +9,7 @@ export default class Wallpaper extends Component {
   this.state={
     location:[],
     restaurant:[],
-    filteredrest:[]
+    filteredRest:[]
   }
     //console.log("Wallpaper Constructor is called!!")
   }
