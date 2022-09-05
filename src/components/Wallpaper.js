@@ -8,7 +8,8 @@ export default class Wallpaper extends Component {
   super();
   this.state={
     location:[],
-    restaurant:[]
+    restaurant:[],
+    filteredrest:[]
   }
     //console.log("Wallpaper Constructor is called!!")
   }
@@ -20,6 +21,20 @@ export default class Wallpaper extends Component {
     .then(response=>response.json())
     .then(data=>this.setState({restaurant:data.data}))
   }
+  
+  renderRest=(event)=>{
+     const searchText=event.target.value;
+     if(searchText){
+       const filteredData=this.state.restaurant.filter(obj=>{
+       return obj.name.toLowerCase().includes(searchText.toLowerCase())
+       })
+       this.setState({filteredRest:filteredData})
+     }
+    else{
+      this.setState({filteredRest:[]})
+    }
+  }
+  
 
   static getDerivedStateFromProps(props,state){
    // console.log("Wallpaper getDerivedStateFromProps Constructor is called!!")
@@ -51,9 +66,9 @@ export default class Wallpaper extends Component {
   render() {
   
     let locationOptions=this.state.location.length && this.state.location.map((item)=><option key={item.name} value={item.city_id}>{item.name}</option>) 
-    let restaurantsList= this.state.restaurant.length && 
+    let restaurantsList= this.state.filteredRest.length && 
     <ul> 
-      {this.state.restaurant.map((item)=>
+      {this.state.filteredRest.map((item)=>
                                    <li key={item.name}>
                                     <Link to={`/details/${item.name}`}>
                                       {item.name}
@@ -76,7 +91,7 @@ export default class Wallpaper extends Component {
                {locationOptions}
           </select>
         <div id="Notebooks">
-          <input className="restaurantsinput" type="text" placeholder="Select Restaurant"/>
+          <input className="restaurantsinput" type="text" placeholder="Select Restaurant" onChange={this.renderRest}/>
                {restaurantsList}
         </div> 
         </div>
