@@ -72,11 +72,11 @@ export default class Wallpaper extends Component {
         </div>
         <div className="locationSelector">
           <select className="locationDropdown" onChange={this.fetchRestaurants}>
-            <option value="0">Select</option>
+            <option value="0">Select-Location</option>
                {locationOptions}
           </select>
         <div id="Notebooks">
-          <input className="restaurantsinput" type="text" placeholder="Search Restaurants"/>
+          <input className="restaurantsinput" type="text" placeholder="Select Restaurant"/>
                {restaurantsList}
         </div> 
         </div>
